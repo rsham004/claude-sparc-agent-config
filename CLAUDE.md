@@ -4,10 +4,241 @@
 
 This CLAUDE.md file enforces a comprehensive development framework that combines the SPARC (Structured Product Architecture Requirement Creation) agent methodology with TDD-Guard enforcement for high-quality, test-driven development.
 
+## Project Initialization (FIRST TASK - MANDATORY)
+
+**🚀 BEFORE ANY DEVELOPMENT BEGINS, CLAUDE MUST:**
+
+### Quick Setup (Recommended)
+Use the automated setup script for instant project initialization:
+
+```bash
+# Clone or download the SPARC framework
+git clone https://github.com/rsham004/claude-sparc-agent-config.git
+cd claude-sparc-agent-config
+
+# Run automated setup
+./setup-sparc-project.sh [project-name]
+
+# Or run interactively
+./setup-sparc-project.sh
+```
+
+**The script automatically:**
+- ✅ Creates proper Claude Code directory structure
+- ✅ Installs all 7 SPARC agents in project-specific folders
+- ✅ Generates project-specific CLAUDE.md with imports
+- ✅ Validates environment and dependencies
+- ✅ Initializes Git repository if needed
+- ✅ Creates initial setup tracking issue
+- ✅ Provides next steps and framework overview
+
+### Manual Setup (Alternative)
+
+### Step 1: Project Discovery & Setup
+```bash
+# ALWAYS start with project name inquiry
+echo "🎯 SPARC Framework Initialization"
+echo "================================="
+echo ""
+echo "Before we begin development, I need to set up your project with the SPARC framework."
+echo ""
+read -p "📝 What is the name of your project? " PROJECT_NAME
+echo ""
+echo "📁 Setting up project structure for: $PROJECT_NAME"
+```
+
+### Step 2: Create Project-Specific Agent Directory
+```bash
+# Create proper Claude Code compatible structure
+mkdir -p ".claude/agents/$PROJECT_NAME"
+mkdir -p ".claude/config/$PROJECT_NAME" 
+mkdir -p "docs/design/$PROJECT_NAME"
+mkdir -p "docs/agents/$PROJECT_NAME"
+
+echo "✅ Created project directories:"
+echo "   .claude/agents/$PROJECT_NAME/ (Agent configurations)"
+echo "   .claude/config/$PROJECT_NAME/ (Framework configuration)"
+echo "   docs/design/$PROJECT_NAME/ (Design documents)"
+echo "   docs/agents/$PROJECT_NAME/ (Agent documentation)"
+```
+
+### Step 3: Install SPARC Agents
+Copy all SPARC agent configurations to the project-specific directory:
+
+```bash
+# Automated SPARC Agent Installation Script
+function install_sparc_agents() {
+    local project_name="$1"
+    local agent_dir=".claude/agents/$project_name"
+    
+    # Define agent sources (update path as needed)
+    local sparc_source="${SPARC_FRAMEWORK_PATH:-SPARC/claude-config/agents}"
+    
+    echo "🤖 Installing SPARC Agents for: $project_name"
+    
+    # Core SPARC agents (from original markdown files)
+    declare -A agents=(
+        ["01-product-manager.md"]="Product Requirements Document generation"
+        ["02-solution-architect.md"]="Technical architecture design"
+        ["03-ux-designer.md"]="User interface design"
+        ["04-visual-style-specialist.md"]="Visual concept generation"
+        ["05-data-architect.md"]="Database schema design"
+        ["06-senior-api-developer.md"]="API specification design"
+        ["07-project-planner.md"]="Implementation planning"
+    )
+    
+    # Copy each agent with validation
+    for agent_file in "${!agents[@]}"; do
+        if [ -f "$sparc_source/$agent_file" ]; then
+            cp "$sparc_source/$agent_file" "$agent_dir/"
+            echo "   ✅ $agent_file - ${agents[$agent_file]}"
+        else
+            echo "   ❌ Missing: $agent_file"
+            return 1
+        fi
+    done
+    
+    # Create framework rules file
+    cat > "$agent_dir/framework-rules.md" << EOF
+# SPARC Framework Rules for $project_name
+
+## Mandatory Workflow Sequence
+1. Product Manager → PRD Generation
+2. UX Designer → UI Design Document  
+3. Visual Style Specialist → Visual Concepts
+4. Solution Architect → Technical Architecture
+5. Data Architect → Database Schema
+6. Senior API Developer → API Specification
+7. Project Planner → Implementation Plan
+
+## Enforcement Rules
+- NO agent may proceed without required inputs from previous agent
+- ALL violations MUST create Git issues automatically
+- TDD-Guard validation required for all code changes
+- Technology lock compliance mandatory
+
+## Project Context
+- Project: $project_name
+- Framework: SPARC with TDD-Guard
+- Agent Directory: $agent_dir
+- Initialized: $(date)
+
+@../../../CLAUDE.md
+EOF
+    
+    echo ""
+    echo "✅ SPARC Framework successfully installed for: $project_name"
+    echo "📁 Agents located at: $agent_dir"
+    return 0
+}
+
+# Execute installation
+install_sparc_agents "$PROJECT_NAME"
+```
+
+### Step 4: Initialize Project Memory
+Create project-specific CLAUDE.md following Claude Code best practices:
+
+```bash
+# Create project-specific CLAUDE.md in project root
+cat > "CLAUDE.md" << EOF
+# $PROJECT_NAME - SPARC Development Framework
+
+## Project Overview
+**Project Name:** $PROJECT_NAME  
+**Framework:** SPARC with TDD-Guard Enforcement  
+**Initialized:** $(date)  
+**Agent Directory:** .claude/agents/$PROJECT_NAME/  
+
+This project follows the SPARC (Structured Product Architecture Requirement Creation) methodology with Test-Driven Development enforcement.
+
+## Current Phase Status
+- [x] Phase 0: Project initialization complete
+- [ ] Phase 1: Requirements gathering (Product Manager)
+- [ ] Phase 2: User experience design (UX Designer)  
+- [ ] Phase 3: Visual style generation (Visual Style Specialist)
+- [ ] Phase 4: Technical architecture (Solution Architect)
+- [ ] Phase 5: Database design (Data Architect)
+- [ ] Phase 6: API specification (Senior API Developer)
+- [ ] Phase 7: Implementation planning (Project Planner)
+- [ ] Phase 8: TDD implementation and validation
+
+## Framework Rules Import
+@.claude/agents/$PROJECT_NAME/framework-rules.md
+
+## Design Documents
+All design documents will be created in: \`docs/design/$PROJECT_NAME/\`
+
+## Development Guidelines
+- **Test-First:** All code must have tests written first
+- **Agent Workflow:** Follow SPARC sequence strictly  
+- **Issue Tracking:** All violations create Git issues automatically
+- **Technology Lock:** Only approved technologies permitted
+- **Documentation:** Maintain design docs throughout development
+
+## Quick Commands
+- **Check Framework Status:** \`claude --framework-status\`
+- **Validate Phase Completion:** \`claude --validate-phase [phase-name]\`
+- **Show Blocking Issues:** \`claude --show-blockers\`
+- **Generate Compliance Report:** \`claude --compliance-report\`
+
+## Next Steps
+1. Run Product Manager agent to create PRD
+2. Follow SPARC workflow sequence
+3. Ensure all blocking issues are resolved before proceeding
+
+---
+*Generated by SPARC Framework on $(date)*
+EOF
+
+echo "📄 Created project-specific CLAUDE.md with framework integration"
+```
+
+### Step 5: Framework Validation
+```bash
+# Verify framework installation
+echo "🔍 Validating SPARC Framework Installation..."
+
+# Check agent files exist
+agent_count=$(ls -1 ".claude/agents/$PROJECT_NAME/" | wc -l)
+if [ $agent_count -eq 7 ]; then
+    echo "✅ All 7 SPARC agents installed correctly"
+else
+    echo "❌ Missing agents - found only $agent_count of 7 required"
+    exit 1
+fi
+
+# Check Git repository
+if [ -d ".git" ]; then
+    echo "✅ Git repository detected"
+else
+    echo "⚠️  No Git repository - initializing..."
+    git init
+    echo "✅ Git repository initialized"
+fi
+
+# Validate Claude Code environment
+if command -v claude &> /dev/null; then
+    echo "✅ Claude Code CLI available"
+else
+    echo "❌ Claude Code CLI not found - please install: npm install -g @anthropic-ai/claude-code"
+    exit 1
+fi
+
+echo ""
+echo "🎉 SPARC Framework successfully initialized for: $PROJECT_NAME"
+echo "🚀 Ready to begin development workflow!"
+```
+
 ## Core Principles
 
 ### 1. **Mandatory Agent Workflow**
-All development projects MUST follow the SPARC agent sequence:
+All development projects MUST follow the SPARC agent sequence AFTER project initialization:
+
+**Phase 0: Project Setup (MANDATORY FIRST)**
+0. **Project Initialization** → Setup project structure, install agents, validate environment
+
+**Phase 1: Design & Architecture**
 1. **Product Manager** → Generate PRD
 2. **UX Designer** → Create UI Design Document  
 3. **Visual Style Specialist** → Generate visual concepts
@@ -15,6 +246,8 @@ All development projects MUST follow the SPARC agent sequence:
 5. **Data Architect** → Create database schema
 6. **Senior API Developer** → Design API specifications
 7. **Project Planner** → Generate implementation plan
+
+**Phase 2: Implementation & Validation**
 8. **TDD-Guard Enforcement** → Validate all code changes
 
 ### 2. **TDD-Guard Integration**
@@ -38,6 +271,31 @@ All problems, violations, and blockers MUST be tracked via Git issues:
 - **Required issue closure** before proceeding to next phase
 
 ## Agent Execution Rules
+
+### Phase 0: Project Initialization (MANDATORY FIRST)
+
+#### 0.1 Project Setup and Agent Installation
+**TRIGGER:** First interaction with Claude Code in any project
+**PROCESS:**
+1. **Project Name Inquiry:** Ask user for project name
+2. **Directory Structure:** Create `.claude/agents/$PROJECT_NAME/` structure
+3. **Agent Installation:** Copy all SPARC agents to project directory
+4. **Environment Validation:** Verify Git, Claude Code CLI, and dependencies
+5. **Project Memory:** Create project-specific CLAUDE.md with imports
+6. **Git Issue Setup:** Initialize issue tracking system
+7. **Framework Validation:** Confirm all components are properly installed
+
+**COMPLETION CRITERIA:**
+- [ ] Project name captured and validated
+- [ ] All directory structures created
+- [ ] 7 SPARC agents installed in project directory
+- [ ] Project-specific CLAUDE.md created with proper imports
+- [ ] Git repository initialized (if not exists)
+- [ ] Claude Code environment validated
+- [ ] Issue tracking system initialized
+- [ ] Framework validation passes
+
+**GIT ISSUE:** Auto-create `setup/project-initialization` issue tracking setup completion
 
 ### Phase 1: Requirements & Design (MANDATORY)
 
@@ -380,17 +638,57 @@ src/
 
 ### Framework Initialization
 ```bash
-# Initialize SPARC workflow
-claude --agent="01-product-manager" --input="project_idea.txt"
+# MANDATORY: Initialize SPARC framework FIRST
+claude "Initialize SPARC framework for my new project"
+
+# After initialization, start agent workflow
+claude "Run Product Manager agent to create PRD for my project idea: [describe your project]"
 
 # Validate design phase completion
-claude --validate-design-docs
+claude "Validate that all design documents are complete and ready for implementation"
 
-# Enable TDD-Guard for implementation
-claude --enable-tdd-guard
+# Enable TDD-Guard for implementation phase
+claude "Enable TDD-Guard and begin implementation following the project plan"
 
-# Check framework compliance
-claude --check-compliance
+# Check framework compliance at any time
+claude "Generate framework compliance report and show any blocking issues"
+```
+
+### Claude Code Integration Commands
+```bash
+# Project status and navigation
+claude "Show current SPARC framework status and next required steps"
+claude "List all open blocking issues that need resolution"
+claude "Navigate to [design-document-name] and review completeness"
+
+# Agent workflow commands
+claude "Execute next agent in SPARC sequence"
+claude "Validate current agent output before proceeding"
+claude "Show dependencies for current phase"
+
+# Issue management commands  
+claude "Create issue for [violation-description]"
+claude "Update issue #[number] with resolution progress"
+claude "Close resolved issues and validate dependencies"
+
+# Quality and compliance
+claude "Run all quality gates and report violations"
+claude "Validate TDD compliance for recent changes"
+claude "Check technology lock compliance"
+claude "Generate audit trail report"
+```
+
+### Memory Management Commands
+```bash
+# Update project memory
+claude "# Update project status: Phase [N] completed"
+claude "# Add new requirement: [requirement-description]" 
+claude "# Document architecture decision: [decision-details]"
+
+# Import additional memories
+claude "@docs/design/$PROJECT_NAME/architecture.md"
+claude "@docs/design/$PROJECT_NAME/database-schema.md"
+claude "@.claude/agents/$PROJECT_NAME/framework-rules.md"
 ```
 
 ### TDD-Guard Operations
@@ -616,3 +914,33 @@ This enhanced CLAUDE.md framework enforces disciplined, high-quality development
 - Automated validation prevents human error or shortcuts
 
 **All development MUST follow these guidelines without exception. Every violation will be tracked, every resolution will be validated, and complete compliance is required for framework success.**
+
+## Getting Started with SPARC Framework
+
+### For New Projects
+1. **Download Framework:** `git clone https://github.com/rsham004/claude-sparc-agent-config.git`
+2. **Run Setup:** `./setup-sparc-project.sh your-project-name`
+3. **Start Development:** `claude "Execute Product Manager agent to create PRD"`
+4. **Follow Workflow:** Complete each SPARC phase in sequence
+5. **Implement with TDD:** Use TDD-Guard for all implementation
+
+### For Existing Projects
+1. **Navigate to Project:** `cd your-existing-project`
+2. **Run Setup:** `/path/to/claude-sparc-agent-config/setup-sparc-project.sh`
+3. **Import Existing Code:** Follow migration guide in framework documentation
+4. **Validate Compliance:** `claude "Generate framework compliance report"`
+5. **Continue Development:** Follow SPARC methodology from current state
+
+### Framework Support
+- **Documentation:** Full guides available in `/docs/` directory
+- **Examples:** Sample projects in `/examples/` directory  
+- **Issues:** Report problems via GitHub issues
+- **Community:** Share experiences and best practices
+
+### Claude Code Optimization
+This framework is specifically designed for Claude Code and leverages:
+- **Project Memory:** Hierarchical CLAUDE.md files with @imports
+- **Agent Specialization:** Domain-specific agents for each development phase
+- **Workflow Integration:** Natural language commands for framework operations
+- **Quality Automation:** Automated validation and issue tracking
+- **Context Awareness:** Framework maintains full project context across sessions

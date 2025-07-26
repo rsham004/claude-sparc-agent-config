@@ -1,0 +1,155 @@
+{
+  "visual-style-specialist": {
+    "command": "python",
+    "args": ["/claude-config/scripts/visual-style-mcp.py"],
+    "description": "Visual Style Specialist for UI concept generation",
+    "capabilities": {
+      "style_generation": {
+        "supported_styles": [
+          "modern-minimal",
+          "bold-energetic",
+          "calm-professional",
+          "neumorphic",
+          "gamified-fun",
+          "elegant-luxury",
+          "retro-nostalgic",
+          "organic-hand-drawn",
+          "futuristic-tech"
+        ],
+        "output_formats": ["grid-layout", "individual-screens", "style-guide"],
+        "device_targets": ["mobile", "tablet", "desktop", "responsive"]
+      },
+      "visual_elements": {
+        "color_palettes": true,
+        "typography_systems": true,
+        "icon_styles": true,
+        "component_variations": true,
+        "spacing_systems": true,
+        "shadow_effects": true,
+        "animation_suggestions": true
+      },
+      "consistency_enforcement": {
+        "maintain_base_structure": true,
+        "preserve_functionality": true,
+        "ensure_accessibility": true,
+        "validate_against_ui_library": true
+      }
+    },
+    "enforcement": {
+      "require_ux_input": true,
+      "validate_style_differentiation": true,
+      "check_accessibility_compliance": true,
+      "ensure_implementation_feasibility": true,
+      "style_accuracy_threshold": 90
+    },
+    "integration": {
+      "input_sources": [
+        "UX.md",
+        "PRD.md",
+        "technology-lock.json",
+        "/approved-docs/frontend/ui-library/"
+      ],
+      "output_destinations": [
+        "Visual-Styles.md",
+        "/design-assets/style-variations/",
+        "/component-library/themes/"
+      ],
+      "coordination_with": [
+        "ux-designer",
+        "frontend-developer",
+        "brand-manager"
+      ]
+    },
+    "validation_rules": {
+      "style_consistency": {
+        "check_element_presence": true,
+        "validate_style_application": true,
+        "ensure_visual_hierarchy": true
+      },
+      "technical_constraints": {
+        "verify_css_compatibility": true,
+        "check_component_support": true,
+        "validate_responsive_behavior": true
+      },
+      "accessibility": {
+        "color_contrast": "WCAG_AA",
+        "touch_targets": "44px_minimum",
+        "focus_indicators": "required",
+        "screen_reader_support": "maintained"
+      }
+    },
+    "style_definitions": {
+      "modern-minimal": {
+        "colors": ["pastel", "monochromatic", "soft"],
+        "typography": ["sans-serif", "clean", "generous-spacing"],
+        "effects": ["subtle-shadows", "rounded-corners", "white-space"],
+        "mood": ["airy", "clean", "simple"]
+      },
+      "bold-energetic": {
+        "colors": ["high-contrast", "vibrant", "primary-focused"],
+        "typography": ["bold-sans", "strong-hierarchy", "impactful"],
+        "effects": ["sharp-shadows", "geometric-shapes", "dynamic-layouts"],
+        "mood": ["motivating", "vibrant", "engaging"]
+      },
+      "calm-professional": {
+        "colors": ["muted", "blues-grays", "earth-tones"],
+        "typography": ["classic", "readable", "consistent"],
+        "effects": ["minimal-shadows", "grid-layout", "balanced"],
+        "mood": ["focused", "organized", "trustworthy"]
+      },
+      "neumorphic": {
+        "colors": ["monochromatic", "off-white", "subtle"],
+        "typography": ["medium-weight", "soft", "readable"],
+        "effects": ["dual-shadows", "extruded", "soft-edges"],
+        "mood": ["soft", "tactile", "modern"]
+      },
+      "gamified-fun": {
+        "colors": ["bright", "playful", "rainbow"],
+        "typography": ["rounded", "friendly", "casual"],
+        "effects": ["badges", "progress-bars", "animations"],
+        "mood": ["engaging", "rewarding", "playful"]
+      },
+      "elegant-luxury": {
+        "colors": ["dark-themes", "metallic-accents", "premium"],
+        "typography": ["thin-serif", "sophisticated", "spacious"],
+        "effects": ["subtle-gradients", "minimal", "refined"],
+        "mood": ["sophisticated", "premium", "refined"]
+      },
+      "retro-nostalgic": {
+        "colors": ["neon", "vintage", "computer-tones"],
+        "typography": ["pixel-fonts", "bitmap", "retro-display"],
+        "effects": ["pixelated", "hard-shadows", "crt-style"],
+        "mood": ["funky", "nostalgic", "unique"]
+      },
+      "organic-hand-drawn": {
+        "colors": ["natural", "earthy", "warm"],
+        "typography": ["handwritten", "script", "casual"],
+        "effects": ["textured", "imperfect-shapes", "sketchy"],
+        "mood": ["whimsical", "approachable", "crafty"]
+      },
+      "futuristic-tech": {
+        "colors": ["dark-base", "neon-accents", "gradients"],
+        "typography": ["tech-display", "modern", "geometric"],
+        "effects": ["glowing", "holographic", "animated"],
+        "mood": ["advanced", "sleek", "digital"]
+      }
+    },
+    "quality_metrics": {
+      "style_differentiation_score": {
+        "minimum": 85,
+        "target": 95,
+        "measurement": "visual_distinction_analysis"
+      },
+      "consistency_score": {
+        "minimum": 90,
+        "target": 98,
+        "measurement": "element_presence_validation"
+      },
+      "implementation_feasibility": {
+        "minimum": 95,
+        "target": 100,
+        "measurement": "technical_compatibility_check"
+      }
+    }
+  }
+}
