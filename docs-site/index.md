@@ -58,9 +58,10 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
         <div class="value">🤝 Collaborative Excellence</div>
         <div class="value">📝 Documentation Mastery</div>
       </div>
-      <p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="https://www.productfoundry.ai" class="btn btn-secondary">Join the Elite →</a>
-      </p>
+        <a href="https://www.meetup.com/pro/dave-braendler/" class="btn btn-secondary">📅 Join Meetups</a>
+      </div>
     </div>
   </div>
 </section>
@@ -279,7 +280,7 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
       <p style="font-size: 1rem; opacity: 0.8;">
         <strong>Built with ❤️ by the <a href="https://www.productfoundry.ai" style="color: #A5B4FC; text-decoration: none;">ProductFoundry.ai</a> community</strong><br>
         Developed by <strong>Ravi Shamihoke</strong> • Licensed under Creative Commons BY-NC 4.0<br>
-        <a href="https://github.com/rsham004/claude-sparc-agent-config" style="color: #A5B4FC;">View Source</a> • <a href="https://www.productfoundry.ai" style="color: #A5B4FC;">Visit ProductFoundry.ai</a>
+        <a href="https://github.com/rsham004/claude-sparc-agent-config" style="color: #A5B4FC;">View Source</a> • <a href="https://www.productfoundry.ai" style="color: #A5B4FC;">Visit ProductFoundry.ai</a> • <a href="https://www.meetup.com/pro/dave-braendler/" style="color: #A5B4FC;">Join Meetups</a>
       </p>
     </div>
   </div>
