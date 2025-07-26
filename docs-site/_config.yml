@@ -1,4 +1,5 @@
 # SPARC Framework Documentation Site
+# Trigger build after GitHub Actions source configuration  
 title: "SPARC Framework by ProductFoundry.ai"
 description: "Structured Product Architecture Requirement Creation - A comprehensive development framework for building high-quality software through structured agent workflows and test-driven development."
 url: "https://rsham004.github.io"
