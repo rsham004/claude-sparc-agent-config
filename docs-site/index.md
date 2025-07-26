@@ -277,8 +277,9 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
     
     <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
       <p style="font-size: 1rem; opacity: 0.8;">
-        <strong>Built with ❤️ by the ProductFoundry.ai community</strong><br>
-        Licensed under Creative Commons BY-NC 4.0 • <a href="https://github.com/rsham004/claude-sparc-agent-config" style="color: #A5B4FC;">View Source</a>
+        <strong>Built with ❤️ by the <a href="https://www.productfoundry.ai" style="color: #A5B4FC; text-decoration: none;">ProductFoundry.ai</a> community</strong><br>
+        Developed by <strong>Ravi Shamihoke</strong> • Licensed under Creative Commons BY-NC 4.0<br>
+        <a href="https://github.com/rsham004/claude-sparc-agent-config" style="color: #A5B4FC;">View Source</a> • <a href="https://www.productfoundry.ai" style="color: #A5B4FC;">Visit ProductFoundry.ai</a>
       </p>
     </div>
   </div>
