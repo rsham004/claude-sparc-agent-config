@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO Meta Tags -->
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+  <meta name="keywords" content="{% if page.keywords %}{{ page.keywords | escape }}{% else %}SPARC Framework, Claude Code, AI Agents, TDD-Guard, ProductFoundry.ai, Test-Driven Development{% endif %}">
+  <meta name="author" content="{{ site.author.name }}">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{% if page.canonical_url %}{{ page.canonical_url }}{% else %}{{ page.url | replace:'index.html','' | absolute_url }}{% endif %}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+  <meta property="og:description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+  <meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ '/assets/images/sparc-social-card.png' | absolute_url }}{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ '/assets/images/sparc-social-card.png' | absolute_url }}{% endif %}">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon-16x16.png' | relative_url }}">
+  
+  <!-- Premium CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/premium.css' | relative_url }}">
+  
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- SEO Plugin -->
+  {% seo %}
+</head>
+
+<body>
+  <!-- Premium Navigation -->
+  <nav class="premium-nav">
+    <div class="container">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <a href="{{ '/' | relative_url }}">
+            <span class="brand-icon">🏗️</span>
+            <span class="brand-text">SPARC</span>
+          </a>
+        </div>
+        
+        <div class="nav-links">
+          <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
+          <a href="{{ '/quick-start/' | relative_url }}" class="nav-link">Quick Start</a>
+          <a href="{{ '/documentation/' | relative_url }}" class="nav-link">Documentation</a>
+          <a href="https://www.productfoundry.ai" class="nav-link external">Community</a>
+          <a href="https://github.com/rsham004/claude-sparc-agent-config" class="nav-link external">GitHub</a>
+        </div>
+        
+        <div class="nav-cta">
+          <a href="{{ '/quick-start/' | relative_url }}" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    {{ content }}
+  </main>
+
+  <!-- Premium Footer -->
+  <footer class="premium-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="brand-icon">🏗️</span>
+            <span class="brand-text">SPARC Framework</span>
+          </div>
+          <p class="footer-description">
+            Built with ❤️ by the ProductFoundry.ai community.<br>
+            Where AI Builders collaborate to shape the future.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.productfoundry.ai" class="social-link">🌐 ProductFoundry.ai</a>
+            <a href="https://github.com/rsham004/claude-sparc-agent-config" class="social-link">📂 GitHub</a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Framework</h4>
+            <a href="{{ '/quick-start/' | relative_url }}">Quick Start</a>
+            <a href="{{ '/documentation/' | relative_url }}">Documentation</a>
+            <a href="{{ '/documentation/#agents' | relative_url }}">Agents</a>
+            <a href="{{ '/documentation/#workflow' | relative_url }}">Workflow</a>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Community</h4>
+            <a href="https://www.productfoundry.ai">ProductFoundry.ai</a>
+            <a href="{{ '/documentation/#contributing' | relative_url }}">Contributing</a>
+            <a href="{{ '/documentation/#core-values' | relative_url }}">Core Values</a>
+            <a href="{{ '/documentation/#license' | relative_url }}">License</a>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <a href="https://github.com/rsham004/claude-sparc-agent-config">GitHub Repository</a>
+            <a href="{{ '/documentation/#tdd-guard' | relative_url }}">TDD-Guard</a>
+            <a href="{{ '/documentation/#principles' | relative_url }}">Principles</a>
+            <a href="{{ '/documentation/#support' | relative_url }}">Support</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <p>&copy; 2024 ProductFoundry.ai Community. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
+        </div>
+        <div class="footer-powered">
+          <p>Powered by <span class="highlight">Claude Code</span> & <span class="highlight">Jekyll</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Premium JavaScript -->
+  <script>
+    // Smooth scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all scroll reveal elements
+    document.addEventListener('DOMContentLoaded', () => {
+      const scrollElements = document.querySelectorAll('.scroll-reveal');
+      scrollElements.forEach(el => observer.observe(el));
+      
+      // Add fade-in class to initial elements
+      const initialElements = document.querySelectorAll('.fade-in');
+      initialElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    });
+
+    // Premium navigation scroll effect
+    let lastScroll = 0;
+    const nav = document.querySelector('.premium-nav');
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Enhanced button interactions
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Performance monitoring
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if ('performance' in window) {
+          const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+          console.log(`🚀 SPARC Framework loaded in ${loadTime}ms`);
+        }
+      }, 0);
+    });
+  </script>
+
+  <!-- Analytics placeholder -->
+  <!-- Add Google Analytics or other tracking here -->
+</body>
+</html>
+
+<style>
+/* Premium Navigation Styles */
+.premium-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-nav.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.nav-brand a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--primary-800);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.brand-icon {
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--primary-700);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--accent-500);
+}
+
+.nav-link.external::after {
+  content: '↗';
+  margin-left: 0.25rem;
+  font-size: 0.8em;
+}
+
+.btn-sm {
+  padding: 12px 24px;
+  font-size: 0.9rem;
+}
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+}
+
+/* Premium Footer Styles */
+.premium-footer {
+  background: var(--primary-900);
+  color: #E2E8F0;
+  padding: 4rem 0 2rem;
+  margin-top: 6rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand {
+  max-width: 400px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.footer-description {
+  color: #A0AEC0;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  color: #A0AEC0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: var(--accent-400);
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-column h4 {
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.footer-column a {
+  display: block;
+  color: #A0AEC0;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: var(--accent-400);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid #2D3748;
+  color: #A0AEC0;
+  font-size: 0.9rem;
+}
+
+.footer-legal a {
+  color: var(--accent-400);
+  text-decoration: none;
+}
+
+.highlight {
+  color: var(--accent-400);
+  font-weight: 600;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-links {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Main content spacing */
+.main-content {
+  padding-top: 80px; /* Account for fixed navigation */
+}
+
+/* Ripple effect for buttons */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+</style>
