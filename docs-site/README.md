@@ -2,6 +2,8 @@
 
 This directory contains the GitHub Pages documentation site for the SPARC Framework, built with Jekyll and optimized for SEO.
 
+<!-- Force rebuild for premium design deployment -->
+
 ## 🚀 Quick Setup
 
 ### For Repository Maintainers
