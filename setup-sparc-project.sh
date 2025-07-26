@@ -4,16 +4,26 @@
 
 set -e  # Exit on error
 
-# Colors for output
+# Colors for output (ProductFoundry.ai branding)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+ORANGE='\033[0;33m'
+BOLD='\033[1m'
 NC='\033[0m' # No Color
+
+# ProductFoundry.ai brand colors
+FOUNDRY_BLUE='\033[38;5;39m'
+FOUNDRY_GREEN='\033[38;5;46m'
+FOUNDRY_PURPLE='\033[38;5;129m'
 
 # Framework paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SPARC_AGENTS_DIR="$SCRIPT_DIR/SPARC/claude-config/agents"
+SPARC_AGENTS_DIR="$SCRIPT_DIR/agents"
 
 # Print colored output
 print_status() {
@@ -32,9 +42,27 @@ print_error() {
     echo -e "${RED}❌ $1${NC}"
 }
 
+# Display ProductFoundry.ai banner
+show_banner() {
+    echo -e "${FOUNDRY_BLUE}${BOLD}"
+    echo "╔══════════════════════════════════════════════════════════════════════════════╗"
+    echo "║                                                                              ║"
+    echo -e "║   ${WHITE}🌟 SPARC Framework - Built by ProductFoundry.ai Community 🌟${FOUNDRY_BLUE}          ║"
+    echo "║                                                                              ║"
+    echo -e "║   ${FOUNDRY_GREEN}🚀 Where AI Builders Collaborate to Shape the Future${FOUNDRY_BLUE}                      ║"
+    echo -e "║   ${FOUNDRY_PURPLE}🤝 Open Source • Community Driven • Ethically Built${FOUNDRY_BLUE}                      ║"
+    echo -e "║   ${WHITE}📍 Join us: www.productfoundry.ai${FOUNDRY_BLUE}                                         ║"
+    echo "║                                                                              ║"
+    echo "╚══════════════════════════════════════════════════════════════════════════════╝"
+    echo -e "${NC}"
+    echo ""
+}
+
 # Main setup function
 setup_sparc_project() {
-    echo -e "${BLUE}"
+    show_banner
+    
+    echo -e "${FOUNDRY_BLUE}${BOLD}"
     echo "🎯 SPARC Framework Project Setup"
     echo "================================="
     echo -e "${NC}"
@@ -72,15 +100,28 @@ setup_sparc_project() {
     # Step 3: Install SPARC agents
     print_status "Installing SPARC agents..."
     
-    # Define core SPARC agents
+    # Define core SPARC agents with color coding (Claude Code best practices)
     declare -A agents=(
-        ["01-product-manager.md"]="Product Requirements Document generation"
-        ["02-solution-architect.md"]="Technical architecture design"  
-        ["03-ux-designer.md"]="User interface design"
-        ["04-visual-style-specialist.md"]="Visual concept generation"
-        ["05-data-architect.md"]="Database schema design"
-        ["06-senior-api-developer.md"]="API specification design"
-        ["07-project-planner.md"]="Implementation planning"
+        ["colored/01-product-manager.md"]="🔵 Product Requirements Document generation"
+        ["colored/02-solution-architect.md"]="🟠 Technical architecture design"  
+        ["colored/06-ux-designer.md"]="🟣 User interface design"
+        ["colored/11-visual-style-specialist.md"]="🟡 Visual concept generation"
+        ["colored/04-data-architect.md"]="🟢 Database schema design"
+        ["colored/05-senior-api-developer.md"]="🔴 API specification design"
+        ["colored/07-project-planner.md"]="⚫ Implementation planning"
+        ["colored/10-prompt-engineer.md"]="🟤 AI prompt optimization"
+    )
+    
+    # Agent descriptions with ProductFoundry.ai branding
+    declare -A agent_descriptions=(
+        ["colored/01-product-manager.md"]="Foundation & Strategy"
+        ["colored/02-solution-architect.md"]="Architecture & Technical Foundation"  
+        ["colored/06-ux-designer.md"]="User Experience & Interface Design"
+        ["colored/11-visual-style-specialist.md"]="Creative & Visual Design"
+        ["colored/04-data-architect.md"]="Data & Database Design"
+        ["colored/05-senior-api-developer.md"]="API Development & Backend Logic"
+        ["colored/07-project-planner.md"]="Implementation Planning & Coordination"
+        ["colored/10-prompt-engineer.md"]="AI Optimization & Enhancement"
     )
     
     agent_count=0
@@ -88,8 +129,8 @@ setup_sparc_project() {
         # Try multiple possible source locations
         source_file=""
         for possible_source in \
+            "$SPARC_AGENTS_DIR/agents/$agent_file" \
             "$SPARC_AGENTS_DIR/$agent_file" \
-            "$SCRIPT_DIR/sparc-agents/$agent_file" \
             "./$agent_file"; do
             if [ -f "$possible_source" ]; then
                 source_file="$possible_source"
@@ -98,8 +139,10 @@ setup_sparc_project() {
         done
         
         if [ -n "$source_file" ]; then
-            cp "$source_file" ".claude/agents/$PROJECT_NAME/"
-            print_success "$agent_file - ${agents[$agent_file]}"
+            # Copy with original filename (remove colored/ prefix)
+            target_file=$(basename "$agent_file")
+            cp "$source_file" ".claude/agents/$PROJECT_NAME/$target_file"
+            echo -e "   ${agents[$agent_file]} - ${FOUNDRY_PURPLE}${agent_descriptions[$agent_file]}${NC}"
             ((agent_count++))
         else
             print_warning "Agent not found: $agent_file"
@@ -109,7 +152,6 @@ setup_sparc_project() {
     if [ $agent_count -eq 0 ]; then
         print_error "No SPARC agents found. Please ensure agents are available in:"
         echo "   - $SPARC_AGENTS_DIR/"
-        echo "   - $SCRIPT_DIR/sparc-agents/"
         echo "   - Current directory"
         exit 1
     fi
@@ -123,13 +165,16 @@ setup_sparc_project() {
 ## Mandatory Workflow Sequence
 0. **Project Initialization** → Setup and validation (COMPLETED ✅)
 1. **Product Manager** → PRD Generation
-2. **UX Designer** → UI Design Document  
-3. **Visual Style Specialist** → Visual Concepts
-4. **Solution Architect** → Technical Architecture
+2. **Solution Architect** → Technical Architecture
+3. **UX Designer** → UI Design Document  
+4. **Visual Style Specialist** → Visual Concepts
 5. **Data Architect** → Database Schema
 6. **Senior API Developer** → API Specification
 7. **Project Planner** → Implementation Plan
 8. **TDD-Guard** → Implementation with test-first validation
+
+Additional Agent Available:
+- **Prompt Engineer** → AI prompt optimization (use as needed)
 
 ## Critical Enforcement Rules
 - ❌ NO agent may proceed without required inputs from previous agent
@@ -287,32 +332,38 @@ Ready to begin Phase 1: Requirements gathering
     installed_agents=$(ls -1 ".claude/agents/$PROJECT_NAME/" 2>/dev/null | wc -l)
     
     echo ""
-    echo -e "${GREEN}🎉 SPARC Framework Setup Complete!${NC}"
-    echo "=================================="
+    echo -e "${FOUNDRY_GREEN}${BOLD}🎉 SPARC Framework Setup Complete!${NC}"
+    echo -e "${FOUNDRY_BLUE}${'='*50}${NC}"
     echo ""
-    echo "📊 **Setup Summary:**"
-    echo "   Project: $PROJECT_NAME"
-    echo "   Agents Installed: $installed_agents"
-    echo "   Framework: SPARC with TDD-Guard"
-    echo "   Status: Ready for development"
+    echo -e "${WHITE}📊 Setup Summary:${NC}"
+    echo -e "   ${FOUNDRY_BLUE}Project:${NC} $PROJECT_NAME"
+    echo -e "   ${FOUNDRY_GREEN}Agents Installed:${NC} $installed_agents"
+    echo -e "   ${FOUNDRY_PURPLE}Framework:${NC} SPARC with TDD-Guard"
+    echo -e "   ${FOUNDRY_GREEN}Status:${NC} Ready for development"
     echo ""
-    echo "🚀 **Next Steps:**"
-    echo "   1. Run: claude \"Execute Product Manager agent to create PRD\""
-    echo "   2. Describe your project idea and requirements"
-    echo "   3. Follow the SPARC workflow sequence"
-    echo "   4. Resolve any blocking issues before proceeding"
+    echo -e "${FOUNDRY_GREEN}🚀 Next Steps:${NC}"
+    echo -e "   ${WHITE}1.${NC} Run: ${FOUNDRY_BLUE}claude \"Execute Product Manager agent to create PRD\"${NC}"
+    echo -e "   ${WHITE}2.${NC} Describe your project idea and requirements"
+    echo -e "   ${WHITE}3.${NC} Follow the SPARC workflow sequence"
+    echo -e "   ${WHITE}4.${NC} Resolve any blocking issues before proceeding"
     echo ""
-    echo "📁 **Key Files Created:**"
-    echo "   - CLAUDE.md (Project memory)"
-    echo "   - .claude/agents/$PROJECT_NAME/ (Agent configurations)"
-    echo "   - docs/design/$PROJECT_NAME/ (Design documents location)"
+    echo -e "${FOUNDRY_PURPLE}📁 Key Files Created:${NC}"
+    echo -e "   ${WHITE}•${NC} CLAUDE.md (Project memory)"
+    echo -e "   ${WHITE}•${NC} .claude/agents/$PROJECT_NAME/ (Agent configurations)"
+    echo -e "   ${WHITE}•${NC} docs/design/$PROJECT_NAME/ (Design documents location)"
     echo ""
-    echo "✨ **Framework Features:**"
-    echo "   - Automated agent workflow"
-    echo "   - Git issue tracking for all violations"
-    echo "   - TDD-Guard enforcement"
-    echo "   - Technology compliance validation"
-    echo "   - Complete audit trail"
+    echo -e "${FOUNDRY_BLUE}✨ Framework Features:${NC}"
+    echo -e "   ${WHITE}•${NC} Color-coded agent workflow (Claude Code best practices)"
+    echo -e "   ${WHITE}•${NC} Git issue tracking for all violations"
+    echo -e "   ${WHITE}•${NC} TDD-Guard enforcement"
+    echo -e "   ${WHITE}•${NC} Technology compliance validation"
+    echo -e "   ${WHITE}•${NC} Complete audit trail"
+    echo ""
+    echo -e "${FOUNDRY_GREEN}🤝 ProductFoundry.ai Community:${NC}"
+    echo -e "   ${WHITE}•${NC} Built by AI Builders collaborating together"
+    echo -e "   ${WHITE}•${NC} Join our weekly sessions: ${FOUNDRY_BLUE}www.productfoundry.ai${NC}"
+    echo -e "   ${WHITE}•${NC} Share your builds and learn from others"
+    echo -e "   ${WHITE}•${NC} Licensed under Creative Commons BY-NC 4.0"
     echo ""
     
     return 0

@@ -1,0 +1,130 @@
+# SPARC Framework Documentation Site Configuration
+# GitHub Pages Jekyll Configuration with SEO Optimization
+
+# Site Settings
+title: "SPARC Framework by ProductFoundry.ai"
+description: "Structured Product Architecture Requirement Creation - A comprehensive development framework for building high-quality software through structured agent workflows and test-driven development."
+url: "https://rsham004.github.io"
+baseurl: "/claude-sparc-agent-config"
+
+# ProductFoundry.ai Branding
+author:
+  name: "ProductFoundry.ai Community"
+  email: "community@productfoundry.ai"
+  url: "https://www.productfoundry.ai"
+
+# SEO Configuration
+logo: "/assets/images/sparc-logo.png"
+social:
+  name: "ProductFoundry.ai"
+  links:
+    - "https://www.productfoundry.ai"
+    - "https://github.com/rsham004/claude-sparc-agent-config"
+
+# Theme and Layout
+theme: minima
+remote_theme: pages-themes/minimal@v0.2.0
+
+# SEO Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+  - jekyll-relative-links
+
+# Collections for better organization
+collections:
+  agents:
+    output: true
+    permalink: /:collection/:name/
+  guides:
+    output: true
+    permalink: /:collection/:name/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "ProductFoundry.ai Community"
+  - scope:
+      path: ""
+      type: "agents"
+    values:
+      layout: "agent"
+  - scope:
+      path: ""
+      type: "guides"
+    values:
+      layout: "guide"
+
+# SEO and Social Media
+twitter:
+  username: productfoundryai
+  card: summary_large_image
+
+facebook:
+  app_id: # Add if available
+  
+# Google Analytics (add when available)
+google_analytics: # Add GA tracking ID when available
+
+# Markdown Configuration
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Build Settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Custom Variables for SEO
+sparc:
+  version: "1.0.0"
+  license: "Creative Commons BY-NC 4.0"
+  repository: "https://github.com/rsham004/claude-sparc-agent-config"
+  
+# Navigation
+navigation:
+  - title: "Home"
+    url: "/"
+  - title: "Quick Start"
+    url: "/quick-start/"
+  - title: "Agents"
+    url: "/agents/"
+  - title: "Guides"
+    url: "/guides/"
+  - title: "Community"
+    url: "/community/"
+  - title: "GitHub"
+    url: "https://github.com/rsham004/claude-sparc-agent-config"
+    external: true
+
+# Features for landing page
+features:
+  - title: "🎨 Color-Coded Agents"
+    description: "Eight specialized agents following Claude Code best practices with unique color identification for streamlined workflow management."
+  - title: "🧪 TDD-Guard Integration"
+    description: "Enforced test-driven development with automatic violation tracking and Git issue management for quality assurance."
+  - title: "🤖 Claude Code Optimized"
+    description: "Purpose-built for Claude Code with proper memory management, project initialization, and natural language commands."
+  - title: "🏗️ Community Built"
+    description: "Developed by the ProductFoundry.ai community with shared values, open development, and collaborative innovation."
+
+# Schema.org structured data
+organization:
+  name: "ProductFoundry.ai"
+  url: "https://www.productfoundry.ai"
+  logo: "https://www.productfoundry.ai/logo.png"
+  description: "Collaborative engine of the AI Builders Group - an active foundry where members co-create real solutions to real challenges."
