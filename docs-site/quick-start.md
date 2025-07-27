@@ -1,8 +1,8 @@
 ---
 layout: default
 title: "Quick Start Guide - SPARC Framework"
-description: "Get started with SPARC Framework in minutes. Clone, setup, and begin building with 8 color-coded Claude Code agents and TDD-Guard enforcement."
-keywords: "SPARC Framework Quick Start, Claude Code setup, AI agents installation, TDD-Guard, ProductFoundry.ai"
+description: "Get started with SPARC Framework in minutes. Clone, setup, and begin building with 9 color-coded Claude Code agents, TDD-Guard enforcement, and YOLO protocol integration."
+keywords: "SPARC Framework Quick Start, Claude Code setup, AI agents installation, TDD-Guard, YOLO protocols, ProductFoundry.ai"
 permalink: /quick-start/
 ---
 
@@ -36,7 +36,7 @@ cd claude-sparc-agent-config
 The script will:
 - 🎯 Ask for your project name
 - 📁 Create directory structure  
-- 🤖 Install 8 color-coded agents
+- 🤖 Install 9 color-coded agents
 - ⚙️ Configure framework rules
 - 🔍 Validate environment
 - 📋 Create initial Git issue
@@ -91,7 +91,11 @@ Each agent has a unique color following Claude Code best practices:
   </div>
   <div class="agent-item">
     <span class="color-dot brown"></span>
-    <strong>🟤 Prompt Engineer</strong> - AI Optimization
+    <strong>🟤 Senior Coder</strong> - TDD Implementation
+  </div>
+  <div class="agent-item">
+    <span class="color-dot red"></span>
+    <strong>🔴 TDD-Guard Tester</strong> - Quality Assurance
   </div>
 </div>
 
@@ -112,8 +116,13 @@ Follow this mandatory sequence for best results:
 7. **⚫ Project Planner** → Generate implementation plan
 
 ### Phase 2: Implementation
-- **🧪 TDD-Guard** → Enforce test-driven development
+8. **🟤 Senior Coder** → TDD-enforced implementation with YOLO protocols
+9. **🔴 TDD-Guard Tester** → Quality assurance and test enforcement
+
+### Phase 3: Quality & Deployment
+- **🚀 YOLO Protocols** → Incremental delivery with canary deployments
 - **📋 Git Issues** → Track all violations and progress
+- **🔄 CI/CD Pipeline** → Automated testing and deployment
 
 ## 🧪 TDD-Guard Integration
 
