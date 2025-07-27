@@ -26,7 +26,7 @@ highlighter: rouge
 # Features for landing page
 features:
   - title: "🎨 Color-Coded Agents"
-    description: "Eight specialized agents following Claude Code best practices with unique color identification for streamlined workflow management."
+    description: "Nine specialized agents following Claude Code best practices with unique color identification for streamlined workflow management."
   - title: "🧪 TDD-Guard Integration"
     description: "Enforced test-driven development with automatic violation tracking and Git issue management for quality assurance."
   - title: "🤖 Claude Code Optimized"

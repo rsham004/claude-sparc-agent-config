@@ -94,8 +94,8 @@ Each agent has a unique color following Claude Code best practices:
     <strong>🟤 Senior Coder</strong> - TDD Implementation
   </div>
   <div class="agent-item">
-    <span class="color-dot red"></span>
-    <strong>🔴 TDD-Guard Tester</strong> - Quality Assurance
+    <span class="color-dot pink"></span>
+    <strong>🔥 TDD-Guard Tester</strong> - Quality Assurance
   </div>
 </div>
 
@@ -117,7 +117,7 @@ Follow this mandatory sequence for best results:
 
 ### Phase 2: Implementation
 8. **🟤 Senior Coder** → TDD-enforced implementation with YOLO protocols
-9. **🔴 TDD-Guard Tester** → Quality assurance and test enforcement
+9. **🔥 TDD-Guard Tester** → Quality assurance and test enforcement
 
 ### Phase 3: Quality & Deployment
 - **🚀 YOLO Protocols** → Incremental delivery with canary deployments
@@ -132,6 +132,8 @@ SPARC enforces test-driven development through TDD-Guard:
 - 📋 **Auto Tracking** - Violations create Git issues automatically  
 - 🔒 **Quality Gates** - Agents cannot proceed without compliance
 - 📊 **Complete Audit** - Full trail of decisions and changes
+
+**[→ Learn about Complete Automation]({{ '/automation/' | relative_url }})**
 
 ## 🗣️ Natural Language Commands
 
@@ -263,6 +265,7 @@ Then describe your project idea and let the framework guide you through structur
 .color-dot.red { background: #dc3545; }
 .color-dot.black { background: #343a40; }
 .color-dot.brown { background: #795548; }
+.color-dot.pink { background: #e91e63; }
 
 table {
   width: 100%;

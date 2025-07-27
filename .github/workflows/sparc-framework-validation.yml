@@ -1,0 +1,435 @@
+name: SPARC Framework Validation
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+
+jobs:
+  sparc-workflow-validation:
+    name: SPARC Workflow Compliance
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    
+    - name: Make scripts executable
+      run: |
+        chmod +x scripts/*.py
+        chmod +x setup-sparc-project.sh
+    
+    - name: Validate SPARC Framework Structure
+      run: |
+        echo "🔍 Validating SPARC framework structure..."
+        
+        # Check required directories exist
+        required_dirs=("agents/colored" "scripts" "docs-site" ".github/workflows")
+        for dir in "${required_dirs[@]}"; do
+          if [ ! -d "$dir" ]; then
+            echo "❌ Missing required directory: $dir"
+            exit 1
+          else
+            echo "✅ Found directory: $dir"
+          fi
+        done
+        
+        # Check core SPARC agents exist
+        required_agents=(
+          "agents/colored/01-product-manager.md"
+          "agents/colored/02-solution-architect.md" 
+          "agents/colored/06-ux-designer.md"
+          "agents/colored/11-visual-style-specialist.md"
+          "agents/colored/04-data-architect.md"
+          "agents/colored/05-senior-api-developer.md"
+          "agents/colored/07-project-planner.md"
+        )
+        
+        for agent in "${required_agents[@]}"; do
+          if [ ! -f "$agent" ]; then
+            echo "❌ Missing required agent: $agent"
+            exit 1
+          else
+            echo "✅ Found agent: $agent"
+          fi
+        done
+        
+        echo "✅ SPARC framework structure validation passed"
+    
+    - name: Validate Setup Script
+      run: |
+        echo "🔍 Testing SPARC setup script..."
+        
+        # Test setup script with dry run
+        ./setup-sparc-project.sh "test-project-ci" || {
+          echo "❌ Setup script failed"
+          exit 1
+        }
+        
+        # Verify setup created required files
+        if [ ! -f "CLAUDE.md" ]; then
+          echo "❌ Setup script did not create CLAUDE.md"
+          exit 1
+        fi
+        
+        if [ ! -d ".claude/agents/test-project-ci" ]; then
+          echo "❌ Setup script did not create agent directory"
+          exit 1
+        fi
+        
+        echo "✅ Setup script validation passed"
+    
+    - name: Test Framework Automation Scripts
+      run: |
+        echo "🔍 Testing framework automation..."
+        
+        # Test Git issue automation
+        python scripts/git-issue-automation.py check-blockers || {
+          echo "❌ Git issue automation failed"
+          exit 1
+        }
+        
+        # Test SPARC workflow enforcer
+        python scripts/sparc-workflow-enforcer.py status test-project-ci || {
+          echo "❌ Workflow enforcer failed"
+          exit 1
+        }
+        
+        # Test TDD-Guard (basic validation)
+        echo 'print("hello")' > test_sample.py
+        python scripts/tdd-guard-enforcer.py validate-file test_sample.py || {
+          echo "ℹ️  TDD-Guard validation completed (expected violations for sample file)"
+        }
+        rm -f test_sample.py
+        
+        echo "✅ Framework automation tests passed"
+    
+    - name: Validate Agent Files Quality
+      run: |
+        echo "🔍 Validating agent file quality..."
+        
+        # Check each agent file has required sections
+        required_sections=(
+          "Role:"
+          "Context:"
+          "Goal:"
+          "Instructions:"
+          "ProductFoundry.ai"
+        )
+        
+        for agent_file in agents/colored/*.md; do
+          echo "Checking $agent_file..."
+          
+          for section in "${required_sections[@]}"; do
+            if ! grep -q "$section" "$agent_file"; then
+              echo "❌ Agent $agent_file missing section: $section"
+              exit 1
+            fi
+          done
+          
+          # Check for ProductFoundry.ai branding
+          if ! grep -q "ProductFoundry.ai" "$agent_file"; then
+            echo "❌ Agent $agent_file missing ProductFoundry.ai branding"
+            exit 1
+          fi
+        done
+        
+        echo "✅ Agent file quality validation passed"
+    
+    - name: Test Documentation Site
+      if: contains(github.event.head_commit.modified, 'docs-site/') || github.event_name == 'workflow_dispatch'
+      run: |
+        echo "🔍 Testing documentation site..."
+        
+        cd docs-site
+        
+        # Check required files exist
+        required_files=("_config.yml" "Gemfile" "index.md" "quick-start.md")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Missing required documentation file: $file"
+            exit 1
+          fi
+        done
+        
+        # Validate Jekyll configuration
+        if ! grep -q "theme:" _config.yml; then
+          echo "❌ Jekyll theme not configured in _config.yml"
+          exit 1
+        fi
+        
+        echo "✅ Documentation site validation passed"
+    
+    - name: Framework Integration Test
+      run: |
+        echo "🔍 Running framework integration test..."
+        
+        # Test complete workflow simulation
+        PROJECT_NAME="integration-test-$(date +%s)"
+        
+        # Run setup
+        ./setup-sparc-project.sh "$PROJECT_NAME"
+        
+        # Verify project structure
+        if [ ! -d ".claude/agents/$PROJECT_NAME" ]; then
+          echo "❌ Project setup failed - missing agent directory"
+          exit 1
+        fi
+        
+        # Test workflow status
+        python scripts/sparc-workflow-enforcer.py status "$PROJECT_NAME"
+        
+        # Cleanup
+        rm -rf ".claude/agents/$PROJECT_NAME"
+        rm -rf "docs/design/$PROJECT_NAME"
+        
+        echo "✅ Framework integration test passed"
+    
+    - name: Performance and Security Check
+      run: |
+        echo "🔍 Running performance and security checks..."
+        
+        # Check script execution times
+        time python scripts/sparc-workflow-enforcer.py status test-project-ci
+        time python scripts/git-issue-automation.py check-blockers
+        
+        # Basic security check - ensure no secrets in files
+        if grep -r "password\|secret\|key\|token" --include="*.py" --include="*.md" --include="*.yml" . | grep -v "# " | grep -v "example\|placeholder\|TODO"; then
+          echo "⚠️  Potential secrets found in files"
+          # Don't fail for now, just warn
+        fi
+        
+        echo "✅ Performance and security checks completed"
+
+  technology-lock-validation:
+    name: Technology Lock Compliance
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.modified, 'technology-lock.json') || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Validate Technology Lock Files
+      run: |
+        echo "🔍 Validating technology lock compliance..."
+        
+        # Find all technology-lock.json files
+        find . -name "technology-lock.json" -type f | while read -r tech_file; do
+          echo "Validating $tech_file..."
+          
+          # Validate JSON syntax
+          if ! python -m json.tool "$tech_file" > /dev/null; then
+            echo "❌ Invalid JSON in $tech_file"
+            exit 1
+          fi
+          
+          # Check required fields
+          required_fields=("frontend" "backend" "database" "deployment")
+          for field in "${required_fields[@]}"; do
+            if ! grep -q "\"$field\"" "$tech_file"; then
+              echo "❌ Missing required field '$field' in $tech_file"
+              exit 1
+            fi
+          done
+          
+          echo "✅ Technology lock file $tech_file is valid"
+        done
+        
+        echo "✅ Technology lock validation completed"
+
+  documentation-quality:
+    name: Documentation Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Validate Documentation Quality
+      run: |
+        echo "🔍 Checking documentation quality..."
+        
+        # Check README files
+        readme_files=("README.md" "docs-site/README.md" "productfoundry/README.md")
+        for readme in "${readme_files[@]}"; do
+          if [ -f "$readme" ]; then
+            # Check for ProductFoundry.ai branding
+            if ! grep -q "ProductFoundry.ai" "$readme"; then
+              echo "⚠️  $readme missing ProductFoundry.ai branding"
+            fi
+            
+            # Check for broken links (basic check)
+            if grep -q "](http" "$readme"; then
+              echo "ℹ️  $readme contains external links - manual verification recommended"
+            fi
+          fi
+        done
+        
+        # Check for consistent formatting in agent files
+        inconsistent_files=0
+        for agent_file in agents/colored/*.md; do
+          # Check for consistent emoji usage
+          if ! grep -q "^# [🔵🟠🟣🟡🟢🔴⚫🟤]" "$agent_file"; then
+            echo "⚠️  $agent_file missing color emoji in title"
+            ((inconsistent_files++))
+          fi
+        done
+        
+        if [ $inconsistent_files -gt 0 ]; then
+          echo "⚠️  Found $inconsistent_files files with formatting inconsistencies"
+        else
+          echo "✅ All agent files have consistent formatting"
+        fi
+        
+        echo "✅ Documentation quality check completed"
+
+  framework-examples-test:
+    name: Test Framework Examples
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.modified, 'examples/')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Test Example Projects
+      run: |
+        echo "🔍 Testing framework examples..."
+        
+        # Test each example if they exist
+        if [ -d "examples" ]; then
+          for example_dir in examples/*/; do
+            if [ -d "$example_dir" ]; then
+              echo "Testing example: $example_dir"
+              
+              # Check if example has required structure
+              if [ -f "$example_dir/CLAUDE.md" ]; then
+                echo "✅ Found CLAUDE.md in $example_dir"
+              else
+                echo "⚠️  Missing CLAUDE.md in $example_dir"
+              fi
+              
+              # Test if example can be validated
+              if [ -f "$example_dir/docs/design" ]; then
+                python scripts/sparc-workflow-enforcer.py status "$(basename "$example_dir")"
+              fi
+            fi
+          done
+        else
+          echo "ℹ️  No examples directory found - skipping example tests"
+        fi
+        
+        echo "✅ Framework examples test completed"
+
+  deployment-readiness:
+    name: Deployment Readiness Check
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Check Release Readiness
+      run: |
+        echo "🔍 Checking deployment readiness..."
+        
+        # Verify all required components are present
+        components=(
+          "setup-sparc-project.sh"
+          "CLAUDE.md"
+          "agents/colored"
+          "scripts/git-issue-automation.py"
+          "scripts/tdd-guard-enforcer.py"
+          "scripts/sparc-workflow-enforcer.py"
+          "docs-site/_config.yml"
+        )
+        
+        missing_components=0
+        for component in "${components[@]}"; do
+          if [ ! -e "$component" ]; then
+            echo "❌ Missing required component: $component"
+            ((missing_components++))
+          fi
+        done
+        
+        if [ $missing_components -eq 0 ]; then
+          echo "✅ All required components present"
+        else
+          echo "❌ Missing $missing_components required components"
+          exit 1
+        fi
+        
+        # Check version consistency
+        if [ -f "VERSION" ]; then
+          version=$(cat VERSION)
+          echo "📋 Current version: $version"
+        fi
+        
+        echo "✅ Deployment readiness check completed"
+
+  notify-on-failure:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [sparc-workflow-validation, technology-lock-validation, documentation-quality]
+    if: failure()
+    
+    steps:
+    - name: Create Issue on Failure
+      if: github.ref == 'refs/heads/main'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: 'SPARC Framework CI/CD Failure',
+            body: `
+            ## CI/CD Pipeline Failure
+            
+            **Workflow:** ${{ github.workflow }}
+            **Run ID:** ${{ github.run_id }}
+            **Commit:** ${{ github.sha }}
+            **Branch:** ${{ github.ref }}
+            
+            The SPARC Framework validation pipeline has failed. Please check the workflow logs and resolve any issues.
+            
+            **Actions Required:**
+            1. Review failed jobs in the workflow run
+            2. Fix any framework structure or validation issues
+            3. Ensure all automation scripts are working correctly
+            4. Verify documentation quality standards
+            
+            **Links:**
+            - [Failed Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - [Repository](https://github.com/${{ github.repository }})
+            
+            Auto-generated by SPARC Framework CI/CD
+            `,
+            labels: ['ci-cd', 'framework', 'urgent']
+          })

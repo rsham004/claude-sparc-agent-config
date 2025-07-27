@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "SPARC Framework - Structured Product Architecture by ProductFoundry.ai"
-description: "Transform your development workflow with SPARC Framework - 8 color-coded Claude Code agents, TDD-Guard enforcement, and community-driven best practices for building high-quality software."
+description: "Transform your development workflow with SPARC Framework - 9 color-coded Claude Code agents with complete automation backbone, TDD-Guard enforcement, and community-driven best practices for building high-quality software."
 keywords: "SPARC Framework, Claude Code, AI Agents, TDD-Guard, ProductFoundry.ai, Test-Driven Development, Software Architecture, API Development, FastAPI, SQLModel"
 image: "/assets/images/sparc-social-card.png"
 canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
@@ -16,12 +16,13 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
       <h1 class="hero-title">SPARC Framework</h1>
       <p class="hero-subtitle">Structured Product Architecture Requirement Creation</p>
       <p class="hero-description">
-        The premier development framework for visionary teams. Eight color-coded Claude Code agents, 
+        The premier development framework for visionary teams. Nine specialized Claude Code agents with complete automation backbone,
         enforced test-driven development, and enterprise-grade quality assurance.
       </p>
       
       <div class="hero-actions">
         <a href="{{ '/quick-start/' | relative_url }}" class="btn btn-primary">🚀 Start Building</a>
+        <a href="{{ '/automation/' | relative_url }}" class="btn btn-secondary">🤖 View Automation</a>
         <a href="https://github.com/rsham004/claude-sparc-agent-config" class="btn btn-secondary">📂 Explore Code</a>
       </div>
       
@@ -32,7 +33,7 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
         </div>
         <div class="stat">
           <span class="stat-number">100%</span>
-          <span class="stat-label">TDD Enforced</span>
+          <span class="stat-label">Automated</span>
         </div>
         <div class="stat">
           <span class="stat-number">🚀</span>
@@ -135,7 +136,7 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
       <p>TDD-Enforced Implementation Excellence</p>
     </div>
     <div class="agent-card scroll-reveal">
-      <div class="agent-color">🔴</div>
+      <div class="agent-color">🟥</div>
       <h4>TDD-Guard Tester</h4>
       <p>Quality Assurance & Test Enforcement</p>
     </div>
@@ -204,8 +205,8 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
       <p>Autonomous test-first development enforcement with real-time violation detection and automatic Git issue escalation. Never ship untested code again.</p>
     </div>
     <div class="quality-item scroll-reveal">
-      <h4>🔒 Technology Compliance</h4>
-      <p>Bulletproof technology stack validation ensuring only approved, enterprise-grade components make it to production.</p>
+      <h4>🔒 Automated Enforcement</h4>
+      <p>Complete automation backbone with Git issue tracking, workflow validation, and quality gate enforcement that actually blocks violations.</p>
     </div>
     <div class="quality-item scroll-reveal">
       <h4>📋 Forensic Audit Trail</h4>
@@ -264,8 +265,11 @@ canonical_url: "https://rsham004.github.io/claude-sparc-agent-config/"
         <li>Canary Deployment Automation</li>
         <li>Real-time Error Rate Monitoring</li>
         <li>Automated Rollback Systems</li>
-        <li>Git Issue Automation</li>
-        <li>Continuous Quality Gates</li>
+        <li>Automated Git Issue Creation</li>
+        <li>Real-time Workflow Enforcement</li>
+        <li>Pre-commit Quality Blocking</li>
+        <li>Agent Dependency Validation</li>
+        <li>Technology Lock Compliance</li>
         <li>Performance Monitoring</li>
       </ul>
     </div>
