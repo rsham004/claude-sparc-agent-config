@@ -3,11 +3,11 @@
 ```
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
-║   🌟 SPARC Framework - Built by the ProductFoundry.ai Community 🌟          ║
+║   🌟 SPARC Framework - Built by the ProductFoundry.ai Community 🌟         ║
 ║                                                                              ║
-║   🚀 Where AI Builders Collaborate to Shape the Future                      ║
-║   🤝 Open Source • Community Driven • Ethically Built                      ║
-║   📍 Join us: www.productfoundry.ai                                         ║
+║   🚀 Where AI Builders Collaborate to Shape the Future                     ║
+║   🤝 Open Source • Community Driven • Ethically Built                     ║
+║   📍 Join us: www.productfoundry.ai                                        ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
